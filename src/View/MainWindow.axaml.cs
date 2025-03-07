@@ -13,6 +13,7 @@ public partial class MainWindow : Window
 
         Width = 1920;
         Height = 1080;
+        WindowState = WindowState.Maximized;
 
         _drawingPanel = new();
         Grid.SetRow(_drawingPanel, 1);

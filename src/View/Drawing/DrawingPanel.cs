@@ -4,6 +4,10 @@ using Avalonia.Platform;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Input;
+using System;
+
+using src.Model.Tools;
+using src.Model;
 
 namespace src.View.Drawing;
 
@@ -11,10 +15,11 @@ namespace src.View.Drawing;
 public partial class DrawingPanel : UserControl
 {
     private WriteableBitmap _bitmap;
-    private bool _isDrawing = false;
-
+    private ITool _tool;
+    public WriteableBitmap Bitmap => _bitmap;
     public DrawingPanel()
     {
+        _tool = new PencilTool(this, Colors.Black);
         _bitmap = new(
             new PixelSize(1920, 1080),
             new Vector(96, 96),
@@ -36,9 +41,9 @@ public partial class DrawingPanel : UserControl
             }
         }
 
-        PointerPressed += OnPointerPressed;
-        PointerReleased += OnPointerReleased;
-        PointerMoved += OnPointerMoved;
+        PointerPressed += _tool.OnPointerPressed;
+        PointerReleased += _tool.OnPointerReleased;
+        PointerMoved += _tool.OnPointerMoved;
     }
 
     public override void Render(DrawingContext context)
@@ -46,49 +51,5 @@ public partial class DrawingPanel : UserControl
         base.Render(context);
 
         context.DrawImage(_bitmap, new Rect(0, 0, _bitmap.PixelSize.Width, _bitmap.PixelSize.Height));
-    }
-
-    private void OnPointerPressed(object sender, PointerPressedEventArgs e)
-    {
-        _isDrawing = true;
-        DrawPixel(e.GetPosition(this), Colors.Red);
-    }
-
-    private void OnPointerReleased(object sender, PointerReleasedEventArgs e)
-    {
-        _isDrawing = false;
-    }
-
-    private void OnPointerMoved(object sender, PointerEventArgs e)
-    {
-        if (_isDrawing)
-        {
-            DrawPixel(e.GetPosition(this), Colors.Red);
-        }
-    }
-
-    private void DrawPixel(Point position, Color color)
-    {
-        int x = (int)position.X;
-        int y = (int)position.Y;
-
-        if (x >= 0 && x < _bitmap.PixelSize.Width && y >= 0 && y < _bitmap.PixelSize.Height)
-        {
-            using (var buffer = _bitmap.Lock())
-            {
-                int offset = y * buffer.RowBytes + x * 4;
-
-                unsafe
-                {
-                    byte* ptr = (byte*)buffer.Address.ToPointer();
-                    ptr[offset] = color.B;
-                    ptr[offset + 1] = color.G;
-                    ptr[offset + 2] = color.R;
-                    ptr[offset + 3] = color.A;
-                }
-            }
-
-            InvalidateVisual();
-        }
     }
 }

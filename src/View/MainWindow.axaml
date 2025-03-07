@@ -9,12 +9,31 @@
         MinWidth="640">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <Grid x:Name="Buttons" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0"
-                Background="LightGray">
-        </StackPanel>
+            <StackPanel Grid.Column="0"
+                    Background="LightGray">
+                <Button x:Name="Settings">Settings</Button>
+            </StackPanel>
+
+            <StackPanel Background="LightGray"
+                    Orientation="Horizontal"
+                    Grid.Column="1">
+                
+                <Button x:Name="Pencil">Pencil</Button>
+                <Button x:Name="Line">Line</Button>
+                <Button x:Name="Fill">Fill</Button>
+                <Button x:Name="Color">Color</Button>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Window>
