@@ -26,11 +26,13 @@
 
             <StackPanel Background="LightGray"
                     Orientation="Horizontal"
-                    Grid.Column="1">
+                    Grid.Column="1"
+                    x:Name="ToolButtons">
                 
-                <Button x:Name="Pencil">Pencil</Button>
-                <Button x:Name="Line">Line</Button>
-                <Button x:Name="Fill">Fill</Button>
+                <ToggleButton x:Name="Pencil" IsChecked="False">Pencil</ToggleButton>
+                <ToggleButton x:Name="Line" IsChecked="False">Line</ToggleButton>
+                <ToggleButton x:Name="Fill" IsChecked="False">Fill</ToggleButton>
+                <ToggleButton x:Name="Shtamp" IsChecked="False">Shtamp</ToggleButton>
                 <Button x:Name="Color">Color</Button>
             </StackPanel>
         </Grid>

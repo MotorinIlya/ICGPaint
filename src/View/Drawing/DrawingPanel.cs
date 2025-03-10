@@ -3,11 +3,8 @@ using Avalonia;
 using Avalonia.Platform;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia.Input;
-using System;
 
 using src.Model.Tools;
-using src.Model;
 
 namespace src.View.Drawing;
 
@@ -17,9 +14,9 @@ public partial class DrawingPanel : UserControl
     private WriteableBitmap _bitmap;
     private ITool _tool;
     public WriteableBitmap Bitmap => _bitmap;
+
     public DrawingPanel()
     {
-        _tool = new PencilTool(this, Colors.Black);
         _bitmap = new(
             new PixelSize(1920, 1080),
             new Vector(96, 96),
@@ -40,16 +37,28 @@ public partial class DrawingPanel : UserControl
                 }
             }
         }
-
-        PointerPressed += _tool.OnPointerPressed;
-        PointerReleased += _tool.OnPointerReleased;
-        PointerMoved += _tool.OnPointerMoved;
     }
 
     public override void Render(DrawingContext context)
     {
         base.Render(context);
 
-        context.DrawImage(_bitmap, new Rect(0, 0, _bitmap.PixelSize.Width, _bitmap.PixelSize.Height));
+        context.DrawImage(_bitmap, 
+                new Rect(0, 0, _bitmap.PixelSize.Width, 
+                _bitmap.PixelSize.Height));
+    }
+
+    public void SetTool(ITool tool)
+    {
+        if (_tool is not null)
+        {
+            PointerPressed -= _tool.OnPointerPressed;
+            PointerReleased -= _tool.OnPointerReleased;
+            PointerMoved -= _tool.OnPointerMoved; 
+        }
+        _tool = tool;
+        PointerPressed += _tool.OnPointerPressed;
+        PointerReleased += _tool.OnPointerReleased;
+        PointerMoved += _tool.OnPointerMoved;
     }
 }
