@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
@@ -204,5 +203,40 @@ public class Drawer(DrawingPanel drawingPanel)
     {
         using var buffer = bitmap.Lock();
         return buffer.Size.Height;
+    }
+
+    private unsafe int GetRowBytes(WriteableBitmap bitmap)
+    {
+        using var buffer = bitmap.Lock();
+        return buffer.RowBytes;
+    }
+
+    public void DrawPolygon(WriteableBitmap bitmap, 
+                            Point center, 
+                            int countAngle, 
+                            int measureAngle,
+                            int radius)
+    {
+        var rotation = measureAngle * Math.PI / 180;
+        var points = new Point[countAngle];
+        for (var i = 0; i < countAngle; i++)
+        {
+            var angle = 2 * Math.PI * i / countAngle + rotation;
+            points[i] = new Point(
+                center.X + radius * Math.Cos(angle),
+                center.Y + radius * Math.Sin(angle)
+            );
+        }
+
+        var stride = GetRowBytes(bitmap);
+
+        for (var i = 0; i < points.Length; i++)
+        {
+            var start = points[i];
+            var end = points[(i + 1) % points.Length];
+            DrawLine(bitmap, start, end);
+        }
+
+        _panel.InvalidateVisual();
     }
 }

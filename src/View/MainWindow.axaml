@@ -2,40 +2,110 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"
+        mc:Ignorable="d" 
         x:Class="src.View.MainWindow"
-        Title="src"
+        Title="ICGPaint"
         MinHeight="480"
-        MinWidth="640">
+        MinWidth="800"
+        FontFamily="Segoe UI"
+        Background="#1A1A1A">
+        
+    <Window.Styles>
+        <Style Selector="ToggleButton">
+            <Setter Property="Background" Value="#2D2D2D"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#404040"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="8 4"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="ToggleButton:checked">
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="BorderBrush" Value="#005F9E"/>
+        </Style>
+
+        <Style Selector="ToggleButton:hover">
+            <Setter Property="Background" Value="#3D3D3D"/>
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#2D2D2D"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#404040"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="8 4"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="Button:hover">
+            <Setter Property="Background" Value="#3D3D3D"/>
+        </Style>
+    </Window.Styles>
+
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <Grid x:Name="Buttons" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <!-- Toolbar -->
+        <Border Grid.Row="0" 
+                Background="#252526" 
+                Height="48"
+                BorderBrush="#333333"
+                BorderThickness="0 0 0 1">
+            
+            <Grid Margin="8 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0"
-                    Background="LightGray">
-                <Button x:Name="Settings">Settings</Button>
-            </StackPanel>
+                <!-- Left Side -->
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <Button x:Name="Settings" Content="⚙ Settings" />
+                    <Separator Background="#333333" Margin="10 0" Width="1"/>
+                </StackPanel>
 
-            <StackPanel Background="LightGray"
-                    Orientation="Horizontal"
-                    Grid.Column="1"
-                    x:Name="ToolButtons">
-                
-                <ToggleButton x:Name="Pencil" IsChecked="False">Pencil</ToggleButton>
-                <ToggleButton x:Name="Line" IsChecked="False">Line</ToggleButton>
-                <ToggleButton x:Name="Fill" IsChecked="False">Fill</ToggleButton>
-                <ToggleButton x:Name="Shtamp" IsChecked="False">Shtamp</ToggleButton>
-                <Button x:Name="Color">Color</Button>
-            </StackPanel>
-        </Grid>
+                <!-- Tools -->
+                <StackPanel Orientation="Horizontal" 
+                          Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          Spacing="4">
+                    
+                    <ToggleButton x:Name="Pencil" ToolTip.Tip="Pencil Tool (P)">✏ Pencil</ToggleButton>
+                    <ToggleButton x:Name="Line" ToolTip.Tip="Line Tool (L)">📏 Line</ToggleButton>
+                    <ToggleButton x:Name="Fill" ToolTip.Tip="Fill Tool (F)">🎨 Fill</ToggleButton>
+                    <ToggleButton x:Name="Polygon" ToolTip.Tip="Polygon Tool (S)">🖇 Polygon</ToggleButton>
+                    
+                    <Separator Background="#333333" Margin="10 0" Width="1"/>
+                    
+                    <Button x:Name="Color" ToolTip.Tip="Color Picker (C)">🌈 Color</Button>
+                </StackPanel>
+            </Grid>
+        </Border>
 
+        <!-- Drawing Area -->
+        <ContentControl Grid.Row="1" 
+                      Background="#1E1E1E"
+                      x:Name="DrawingArea"/>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" 
+              Background="#252526"
+              Height="24"
+              BorderBrush="#333333"
+              BorderThickness="0 1 0 0">
+            <TextBlock Text="Ready" 
+                     Foreground="Gray"
+                     VerticalAlignment="Center"
+                     Margin="8 0"/>
+        </Border>
     </Grid>
 </Window>

@@ -16,7 +16,7 @@ public class MainController
     private LineTool _lineTool;
     private PencilTool _pencilTool;
     private FillTool _fillTool;
-    private ITool _actualTool;
+    private PolygonTool _polygonTool;
 
     public MainController(MainWindow window)
     {
@@ -25,6 +25,7 @@ public class MainController
         _lineTool = new(_window.Panel, _drawer);
         _pencilTool = new(_window.Panel, _drawer);
         _fillTool = new(_window.Panel, _drawer);
+        _polygonTool = new(_window.Panel, _drawer, 3, 0, 10);
     }
 
     public void Update(IEvent gameEvent)
@@ -40,6 +41,11 @@ public class MainController
         else if (gameEvent is FillEvent)
         {
             _window.SetTool(_fillTool);
+        }
+        else if (gameEvent is PolygonEvent e)
+        {
+            _polygonTool.SetParameters(e.CountAngle, e.AngleMeasure, e.Radius);
+            _window.SetTool(_polygonTool);
         }
     }
 }

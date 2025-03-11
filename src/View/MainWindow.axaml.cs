@@ -6,7 +6,7 @@ using src.View.Drawing;
 using src.Service.Events;
 using Avalonia.Interactivity;
 using src.Model.Tools;
-using Avalonia.Controls.Primitives;
+using src.View.PolygonCreate;
 
 namespace src.View;
 
@@ -34,6 +34,7 @@ public partial class MainWindow : Window
         Pencil.Checked += OnPencilToolClick;
         Line.Checked += OnLineToolClick;
         Fill.Checked += OnFillToolClick;
+        Polygon.Checked += OnPolygonToolClick;
     }
 
     public void SetTool(ITool tool)
@@ -46,6 +47,7 @@ public partial class MainWindow : Window
         _controller.Update(new PencilEvent());
         Line.IsChecked = false;
         Fill.IsChecked = false;
+        Polygon.IsChecked = false;
     }
 
     private void OnLineToolClick(object sender, RoutedEventArgs e)
@@ -53,6 +55,7 @@ public partial class MainWindow : Window
         _controller.Update(new LineEvent());
         Pencil.IsChecked = false;
         Fill.IsChecked = false;
+        Polygon.IsChecked = false;
     }
 
     private void OnFillToolClick(object sender, RoutedEventArgs e)
@@ -60,5 +63,15 @@ public partial class MainWindow : Window
         _controller.Update(new FillEvent());
         Pencil.IsChecked = false;
         Line.IsChecked = false;
+        Polygon.IsChecked = false;
+    }
+
+    private void OnPolygonToolClick(object sender, RoutedEventArgs e)
+    {
+        var polygonWindow = new PolygonCreateWindow(_controller);
+        polygonWindow.ShowDialog(this);
+        Pencil.IsChecked = false;
+        Line.IsChecked = false;
+        Fill.IsChecked = false;
     }
 }
