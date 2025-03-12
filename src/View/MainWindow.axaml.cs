@@ -1,6 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Media;
-
 using src.Controller;
 using src.View.Drawing;
 using src.Service.Events;
@@ -31,10 +29,10 @@ public partial class MainWindow : Window
         
         _controller = new(this);
 
-        Pencil.Checked += OnPencilToolClick;
-        Line.Checked += OnLineToolClick;
-        Fill.Checked += OnFillToolClick;
-        Polygon.Checked += OnPolygonToolClick;
+        Pencil.IsCheckedChanged += OnPencilToolClick;
+        Line.IsCheckedChanged += OnLineToolClick;
+        Fill.IsCheckedChanged += OnFillToolClick;
+        Polygon.IsCheckedChanged += OnPolygonToolClick;
     }
 
     public void SetTool(ITool tool)

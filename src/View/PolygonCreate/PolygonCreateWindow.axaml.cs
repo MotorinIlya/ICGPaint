@@ -5,7 +5,6 @@ using src.Service.Events;
 
 namespace src.View.PolygonCreate;
 
-// при закрытии окна ставить дефолтный штамп
 public partial class PolygonCreateWindow : Window
 {
     private MainController _controller;

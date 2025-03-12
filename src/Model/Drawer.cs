@@ -15,6 +15,40 @@ public class Drawer(DrawingPanel drawingPanel)
     private int _thinkness;
     private DrawingPanel _panel = drawingPanel;
 
+    // public void DrawLine(WriteableBitmap bitmap, Point start, Point end)
+    // {
+    //     var x0 = (int)start.X;
+    //     var y0 = (int)start.Y;
+    //     var x1 = (int)end.X;
+    //     var y1 = (int)end.Y;
+
+    //     var dx = Math.Abs(x1 - x0);
+    //     var dy = Math.Abs(y1 - y0);
+    //     var sx = x0 < x1 ? 1 : -1;
+    //     var sy = y0 < y1 ? 1 : -1;
+    //     var err = dx - dy;
+
+    //     while (true)
+    //     {
+    //         DrawPixel(bitmap, new Point(x0, y0));
+
+    //         if (x0 == x1 && y0 == y1) break;
+
+    //         int e2 = 2 * err;
+    //         if (e2 > -dy)
+    //         {
+    //             err -= 2 * dy;
+    //             x0 += sx;
+    //         }
+    //         if (e2 < dx)
+    //         {
+    //             err += 2 * dx;
+    //             y0 += sy;
+    //         }
+    //     }
+    //     _panel.InvalidateVisual();
+    // }
+
     public void DrawLine(WriteableBitmap bitmap, Point start, Point end)
     {
         var x0 = (int)start.X;
@@ -22,30 +56,43 @@ public class Drawer(DrawingPanel drawingPanel)
         var x1 = (int)end.X;
         var y1 = (int)end.Y;
 
-        var dx = Math.Abs(x1 - x0);
-        var dy = Math.Abs(y1 - y0);
-        var sx = x0 < x1 ? 1 : -1;
-        var sy = y0 < y1 ? 1 : -1;
-        var err = dx - dy;
+        int dx = Math.Abs(x1 - x0);
+        int dy = Math.Abs(y1 - y0);
+        int sx = x0 < x1 ? 1 : -1;
+        int sy = y0 < y1 ? 1 : -1;
+        int error;
 
-        while (true)
+        if (dx > dy)
         {
-            DrawPixel(bitmap, new Point(x0, y0));
-
-            if (x0 == x1 && y0 == y1) break;
-
-            int e2 = 2 * err;
-            if (e2 > -dy)
+            error = -dx;
+            while (x0 != x1)
             {
-                err -= 2 * dy;
+                DrawPixel(bitmap, x0, y0);
+                if (error >= 0)
+                {
+                    y0 += sy;
+                    error -= 2 * dx;
+                }
+                error += 2 * dy;
                 x0 += sx;
             }
-            if (e2 < dx)
+        }
+        else
+        {
+            error = - dy;
+            while (y0 != y1)
             {
-                err += 2 * dx;
+                DrawPixel(bitmap, x0, y0);
+                if (error >= 0)
+                {
+                    x0 += sx;
+                    error -= 2 * dy;
+                }
+                error += 2 * dx;
                 y0 += sy;
             }
         }
+        DrawPixel(bitmap, x0, y0);
         _panel.InvalidateVisual();
     }
 
