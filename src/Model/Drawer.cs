@@ -16,6 +16,8 @@ public class Drawer(DrawingPanel drawingPanel)
     private int _thinkness;
     private DrawingPanel _panel = drawingPanel;
 
+    public void SetColor(Color color) => _color = color;
+
     public void DrawLine(WriteableBitmap bitmap, Point start, Point end)
     {
         var x0 = (int)start.X;

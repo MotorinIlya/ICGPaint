@@ -5,6 +5,7 @@ using src.Service.Events;
 using Avalonia.Interactivity;
 using src.Model.Tools;
 using src.View.PolygonCreate;
+using Avalonia.Media;
 
 namespace src.View;
 
@@ -33,6 +34,10 @@ public partial class MainWindow : Window
         Line.IsCheckedChanged += OnLineToolClick;
         Fill.IsCheckedChanged += OnFillToolClick;
         Polygon.IsCheckedChanged += OnPolygonToolClick;
+        BlackColor.Click += OnBlackClick;
+        RedColor.Click += OnRedCLick;
+        GreenColor.Click += OnGreenClick;
+        BlueColor.Click += OnBlueClick;
     }
 
     public void SetTool(ITool tool)
@@ -71,5 +76,30 @@ public partial class MainWindow : Window
         Pencil.IsChecked = false;
         Line.IsChecked = false;
         Fill.IsChecked = false;
+    }
+
+    private void OnBlackClick(object sender, RoutedEventArgs e)
+    {
+        _controller.Update(new ChangeColorEvent(Colors.Black));
+    }
+
+    private void OnRedCLick(object sender, RoutedEventArgs e)
+    {
+        _controller.Update(new ChangeColorEvent(Colors.Red));
+    }
+
+    private void OnGreenClick(object sender, RoutedEventArgs e)
+    {
+        _controller.Update(new ChangeColorEvent(Colors.Green));
+    }
+
+    private void OnBlueClick(object sender, RoutedEventArgs e)
+    {
+        _controller.Update(new ChangeColorEvent(Colors.Blue));
+    }
+
+    private void OnClearClick(object sender, RoutedEventArgs e)
+    {
+        _controller.Update(new ClearEvent());
     }
 }

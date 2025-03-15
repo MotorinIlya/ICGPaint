@@ -89,16 +89,17 @@
                             HorizontalAlignment="Left"
                             Spacing="4">
                     
-                    <ToggleButton x:Name="Pencil" ToolTip.Tip="Pencil Tool (P)">✏ Pencil</ToggleButton>
-                    <ToggleButton x:Name="Line" ToolTip.Tip="Line Tool (L)">📏 Line</ToggleButton>
-                    <ToggleButton x:Name="Fill" ToolTip.Tip="Fill Tool (F)">🎨 Fill</ToggleButton>
-                    <ToggleButton x:Name="Polygon" ToolTip.Tip="Polygon Tool (S)">🖇 Polygon</ToggleButton>
+                    <ToggleButton x:Name="Pencil" ToolTip.Tip="Карандаш">✏</ToggleButton>
+                    <ToggleButton x:Name="Line" ToolTip.Tip="Линия">📏</ToggleButton>
+                    <ToggleButton x:Name="Fill" ToolTip.Tip="Заливка">🎨</ToggleButton>
+                    <ToggleButton x:Name="Polygon" ToolTip.Tip="Фигуры">🖇</ToggleButton>
+                    <Button x:Name="Clear" ToolTip.Tip="Стереть всё">🧽</Button>
                     
                     <Separator Background="#333333" Margin="10 0" Width="1"/>
                     
                     <!-- Кнопки цвета -->
                     <Button x:Name="ColorPickerButton" 
-                            Content="🎨 Выбрать" 
+                            Content="🎨" 
                             ToolTip.Tip="Выбор цвета"/>
                     
                     <Button x:Name="BlackColor" 

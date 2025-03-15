@@ -47,5 +47,13 @@ public class MainController
             _polygonTool.SetParameters(e.CountAngle, e.AngleMeasure, e.Radius);
             _window.SetTool(_polygonTool);
         }
+        else if (gameEvent is ChangeColorEvent change)
+        {
+            _drawer.SetColor(change.Col);
+        }
+        else if (gameEvent is ClearEvent)
+        {
+            _drawer.Clear(_window.Panel.Bitmap);
+        }
     }
 }
