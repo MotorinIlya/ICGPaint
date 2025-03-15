@@ -45,6 +45,16 @@
         <Style Selector="Button:hover">
             <Setter Property="Background" Value="#3D3D3D"/>
         </Style>
+
+        <!-- Стиль для цветных кнопок -->
+        <Style Selector="Button.color-button">
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="2 0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
     </Window.Styles>
 
     <Grid x:Name="MainGrid">
@@ -54,7 +64,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <!-- Toolbar -->
+        <!-- Верхняя панель инструментов -->
         <Border Grid.Row="0" 
                 Background="#252526" 
                 Height="48"
@@ -67,17 +77,17 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Left Side -->
+                <!-- Левая часть -->
                 <StackPanel Orientation="Horizontal" Grid.Column="0">
                     <Button x:Name="Settings" Content="⚙ Settings" />
                     <Separator Background="#333333" Margin="10 0" Width="1"/>
                 </StackPanel>
 
-                <!-- Tools -->
+                <!-- Инструменты -->
                 <StackPanel Orientation="Horizontal" 
-                          Grid.Column="1"
-                          HorizontalAlignment="Left"
-                          Spacing="4">
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Spacing="4">
                     
                     <ToggleButton x:Name="Pencil" ToolTip.Tip="Pencil Tool (P)">✏ Pencil</ToggleButton>
                     <ToggleButton x:Name="Line" ToolTip.Tip="Line Tool (L)">📏 Line</ToggleButton>
@@ -86,17 +96,47 @@
                     
                     <Separator Background="#333333" Margin="10 0" Width="1"/>
                     
-                    <Button x:Name="Color" ToolTip.Tip="Color Picker (C)">🌈 Color</Button>
+                    <!-- Кнопки цвета -->
+                    <Button x:Name="ColorPickerButton" 
+                            Content="🎨 Выбрать" 
+                            ToolTip.Tip="Выбор цвета"/>
+                    
+                    <Button x:Name="BlackColor" 
+                            Background="Black" 
+                            Classes="color-button"
+                            ToolTip.Tip="Черный"/>
+                    
+                    <Button x:Name="RedColor" 
+                            Background="Red" 
+                            Classes="color-button"
+                            ToolTip.Tip="Красный"/>
+                    
+                    <Button x:Name="GreenColor" 
+                            Background="Lime" 
+                            Classes="color-button"
+                            ToolTip.Tip="Зеленый"/>
+                    
+                    <Button x:Name="BlueColor" 
+                            Background="Blue" 
+                            Classes="color-button"
+                            ToolTip.Tip="Синий"/>
+                    
+                    <Separator Background="#333333" Margin="10 0" Width="1"/>
+                    
+                    <!-- Кнопка толщины линии -->
+                    <Button x:Name="ThicknessButton" 
+                            Content="Толщина: 2px" 
+                            ToolTip.Tip="Изменить толщину линии"/>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <!-- Drawing Area -->
+        <!-- Область рисования -->
         <ContentControl Grid.Row="1" 
                       Background="#1E1E1E"
                       x:Name="DrawingArea"/>
 
-        <!-- Status Bar -->
+        <!-- Статус-бар -->
         <Border Grid.Row="2" 
               Background="#252526"
               Height="24"
