@@ -206,18 +206,15 @@ public class Drawer(DrawingPanel drawingPanel)
                             int radius)
     {   
         var rotation = measureAngle * Math.PI / 180;
+        var angleStep = Math.PI / pointsCount;
         Point[] points = new Point[pointsCount * 2];
-        for (int i = 0; i < pointsCount * 2; i += 2)
+        for (int i = 0; i < pointsCount * 2; i++)
         {
-            var angle = 2 * Math.PI * i / pointsCount + rotation;
-            var minAngle = 2 * Math.PI * (i + 1/2) / pointsCount + rotation;
+            var currentRadius = (i % 2 == 0) ? radius : radius / 3;
+            var angle = angleStep * i + rotation;
             points[i] = new Point(
-                center.X + (int)(radius * Math.Cos(angle)),
-                center.Y + (int)(radius * Math.Sin(angle))
-            );
-            points[i + 1] = new Point(
-                center.X + (int)(radius / 3 * Math.Cos(minAngle)),
-                center.Y + (int)(radius / 3 * Math.Sin(minAngle))
+                center.X + (int)(currentRadius * Math.Cos(angle)),
+                center.Y + (int)(currentRadius * Math.Sin(angle))
             );
         }
 

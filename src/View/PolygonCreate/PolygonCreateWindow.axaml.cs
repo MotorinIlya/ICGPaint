@@ -16,8 +16,6 @@ public partial class PolygonCreateWindow : Window
     {
         InitializeComponent();
         _controller = controller;
-        PolygonCheckBox.IsCheckedChanged += (s, e) => StarCheckBox.IsChecked = false;
-        StarCheckBox.IsCheckedChanged += (s, e) => PolygonCheckBox.IsChecked = false;
         AngleTextBox.TextChanged += (s, e) => VerifyTextBox(AngleTextBox, AngleSlider);
         TurnTextBox.TextChanged += (s, e) => VerifyTextBox(TurnTextBox, TurnSlider);
         RadiusTextBox.TextChanged += (s, e) => VerifyTextBox(RadiusTextBox, RadiusSlider);
