@@ -38,6 +38,8 @@ public partial class MainWindow : Window
         RedColor.Click += OnRedCLick;
         GreenColor.Click += OnGreenClick;
         BlueColor.Click += OnBlueClick;
+        Clear.Click += OnClearClick;
+        ThicknessSlider.ValueChanged += OnSliderChanged;
     }
 
     public void SetTool(ITool tool)
@@ -71,11 +73,14 @@ public partial class MainWindow : Window
 
     private void OnPolygonToolClick(object sender, RoutedEventArgs e)
     {
-        var polygonWindow = new PolygonCreateWindow(_controller);
-        polygonWindow.ShowDialog(this);
-        Pencil.IsChecked = false;
-        Line.IsChecked = false;
-        Fill.IsChecked = false;
+        if (Polygon.IsChecked == true)
+        {
+            var polygonWindow = new PolygonCreateWindow(_controller);
+            polygonWindow.Show(this);
+            Pencil.IsChecked = false;
+            Line.IsChecked = false;
+            Fill.IsChecked = false;
+        }
     }
 
     private void OnBlackClick(object sender, RoutedEventArgs e)
@@ -101,5 +106,14 @@ public partial class MainWindow : Window
     private void OnClearClick(object sender, RoutedEventArgs e)
     {
         _controller.Update(new ClearEvent());
+    }
+
+    private void OnSliderChanged(object sender, RoutedEventArgs e)
+    {
+        if ( sender is Slider slider)
+        {
+            var val = (int)slider.Value;
+            _controller.Update(new SliderEvent(val));
+        }
     }
 }

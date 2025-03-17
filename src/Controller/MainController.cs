@@ -55,5 +55,9 @@ public class MainController
         {
             _drawer.Clear(_window.Panel.Bitmap);
         }
+        else if (gameEvent is SliderEvent ev)
+        {
+            _drawer.SetThinkness(ev.Thinkness);
+        }
     }
 }

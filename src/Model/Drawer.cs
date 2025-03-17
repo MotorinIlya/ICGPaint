@@ -13,10 +13,11 @@ namespace src.Model;
 public class Drawer(DrawingPanel drawingPanel)
 {
     private Color _color = Colors.Black;
-    private int _thinkness;
+    private int _thinkness = 1;
     private DrawingPanel _panel = drawingPanel;
 
     public void SetColor(Color color) => _color = color;
+    public void SetThinkness(int num) => _thinkness = num;
 
     public void DrawLine(WriteableBitmap bitmap, Point start, Point end)
     {
@@ -36,7 +37,13 @@ public class Drawer(DrawingPanel drawingPanel)
             error = -dx;
             while (x0 != x1)
             {
-                DrawPixel(bitmap, x0, y0);
+                for (var i = y0 - (_thinkness - 1) / 2; i < y0 + _thinkness / 2 + 1; i++)
+                {
+                    if (i >= 0 && i < bitmap.PixelSize.Height)
+                    {
+                        DrawPixel(bitmap, x0, i);
+                    }
+                }
                 if (error >= 0)
                 {
                     y0 += sy;
@@ -51,7 +58,13 @@ public class Drawer(DrawingPanel drawingPanel)
             error = - dy;
             while (y0 != y1)
             {
-                DrawPixel(bitmap, x0, y0);
+                for (var i = x0 - (_thinkness - 1) / 2; i < x0 + _thinkness / 2 + 1; i++)
+                {
+                    if (i >= 0 && i < bitmap.PixelSize.Width)
+                    {
+                        DrawPixel(bitmap, i, y0);
+                    }
+                }
                 if (error >= 0)
                 {
                     x0 += sx;
@@ -117,24 +130,25 @@ public class Drawer(DrawingPanel drawingPanel)
     {
         using var buffer = bitmap.Lock();
 
-        byte* ptr = (byte*)buffer.Address;
+        var ptr = (byte*)buffer.Address;
 
-        int width = buffer.Size.Width;
-        int height = buffer.Size.Height;
-        int stride = buffer.RowBytes;
+        var width = buffer.Size.Width;
+        var height = buffer.Size.Height;
+        var stride = buffer.RowBytes;
 
-        for (int y = 0; y < height; y++)
+        for (var y = 0; y < height; y++)
         {
-            for (int x = 0; x < width; x++)
+            for (var x = 0; x < width; x++)
             {
-                int index = y * stride + x * 4;
+                var index = y * stride + x * 4;
 
-                ptr[index + 0] = 255;
+                ptr[index] = 255;
                 ptr[index + 1] = 255;
                 ptr[index + 2] = 255;
                 ptr[index + 3] = 255;
             }
         }
+        _panel.InvalidateVisual();
     }
 
     private unsafe void DrawPixel(WriteableBitmap bitmap, int x, int y)

@@ -1,14 +1,45 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
         x:Class="src.View.PolygonCreate.PolygonCreateWindow"
-        Title="Create Polygon"
-        Width="300"
-        Height="250">
-    <StackPanel>
-        <TextBox x:Name="Count"/>
-        <TextBox x:Name="Measure"/>
-        <TextBox x:Name="Radius"/>
-        <TextBlock x:Name="ErrorTextBlock" Foreground="Red" Margin="0 5" />
-        <Button Content="Save" Click="SaveButtonClick" />
+        Title="Параметры фигуры"
+        SizeToContent="WidthAndHeight"
+        Background="#80000000"
+        SystemDecorations="None"
+        CanResize="False">
+    <StackPanel Margin="20">
+        <!-- Заголовок -->
+        <TextBlock Text="Параметры фигуры" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+        
+        <!-- Выбор типа фигуры -->
+        <CheckBox x:Name="PolygonCheckBox" Content="Многоугольник" IsChecked="True" Margin="0,0,0,5"/>
+        <CheckBox x:Name="StarCheckBox" Content="Звезда" IsChecked="False" Margin="0,0,0,10"/>
+        
+        <!-- Количество углов -->
+        <TextBlock Text="Количество углов" Margin="0,0,0,5"/>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Slider x:Name="AngleSlider" Minimum="3" Maximum="20" Width="200" Margin="0,0,10,0"/>
+            <TextBox x:Name="AngleTextBox" Width="50" Text="{Binding Value, ElementName=AngleSlider, Mode=TwoWay, StringFormat='{}{0:F0}'}" />
+        </StackPanel>
+
+        <TextBlock Text="Угол поворота" Margin="0,0,0,5"/>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Slider x:Name="TurnSlider" Minimum="0" Maximum="360" Width="200" Margin="0,0,10,0"/>
+            <TextBox x:Name="TurnTextBox" Width="50" Text="{Binding Value, ElementName=TurnSlider, Mode=TwoWay, StringFormat='{}{0:F0}'}" />
+        </StackPanel>
+
+        <TextBlock Text="Радиус" Margin="0,0,0,5"/>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Slider x:Name="RadiusSlider" Minimum="10" Maximum="300" Width="200" Margin="0,0,10,0"/>
+            <TextBox x:Name="RadiusTextBox" Width="50" Text="{Binding Value, ElementName=RadiusSlider, Mode=TwoWay, StringFormat='{}{0:F0}'}" />
+        </StackPanel>
+        
+        <!-- Кнопки управления -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" Margin="0,0,10,0"/>
+            <Button Content="Отмена"/>
+        </StackPanel>
     </StackPanel>
 </Window>

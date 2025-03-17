@@ -79,8 +79,8 @@
 
                 <!-- Левая часть -->
                 <StackPanel Orientation="Horizontal" Grid.Column="0">
-                    <Button x:Name="Settings" Content="⚙ Settings" />
-                    <Separator Background="#333333" Margin="10 0" Width="1"/>
+                    <Button x:Name="Settings" Content="⚙" />
+                    <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
                 </StackPanel>
 
                 <!-- Инструменты -->
@@ -95,7 +95,7 @@
                     <ToggleButton x:Name="Polygon" ToolTip.Tip="Фигуры">🖇</ToggleButton>
                     <Button x:Name="Clear" ToolTip.Tip="Стереть всё">🧽</Button>
                     
-                    <Separator Background="#333333" Margin="10 0" Width="1"/>
+                    <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
                     
                     <!-- Кнопки цвета -->
                     <Button x:Name="ColorPickerButton" 
@@ -121,13 +121,25 @@
                             Background="Blue" 
                             Classes="color-button"
                             ToolTip.Tip="Синий"/>
+
+                    <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
+
+                    <!-- Новые элементы: TextBox и Slider -->
+                    <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                        <TextBox Width="60" 
+                                Text="{Binding Value, ElementName=ThicknessSlider, Mode=TwoWay, StringFormat='{}{0:F0}'}"
+                                Margin="4 0"
+                                Foreground="White"
+                                Background="#333333"/>
+                        <Slider x:Name="ThicknessSlider"
+                                Minimum="1"
+                                Maximum="50"
+                                Width="120"
+                                Value="2"
+                                Margin="4 0"/>
+                    </StackPanel>
                     
-                    <Separator Background="#333333" Margin="10 0" Width="1"/>
-                    
-                    <!-- Кнопка толщины линии -->
-                    <Button x:Name="ThicknessButton" 
-                            Content="Толщина: 2px" 
-                            ToolTip.Tip="Изменить толщину линии"/>
+                    <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
                 </StackPanel>
             </Grid>
         </Border>
