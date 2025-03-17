@@ -9,30 +9,24 @@ public partial class PolygonCreateWindow : Window
 {
     private MainController _controller;
 
-    [System.Obsolete]
     public PolygonCreateWindow(MainController controller)
     {
         InitializeComponent();
         _controller = controller;
-        PolygonCheckBox.Checked += (s, e) => StarCheckBox.IsChecked = false;
-        StarCheckBox.Checked += (s, e) => PolygonCheckBox.IsChecked = false;
+        PolygonCheckBox.IsCheckedChanged += (s, e) => StarCheckBox.IsChecked = false;
+        StarCheckBox.IsCheckedChanged += (s, e) => PolygonCheckBox.IsChecked = false;
         AngleTextBox.TextChanged += (s, e) => VerifyTextBox();
+        TurnTextBox.TextChanged += (s, e) => VerifyTextBox();
+        RadiusTextBox.TextChanged += (s, e) => VerifyTextBox();
+        SaveButton.Click += SaveButtonClick;
     }
 
-    private void SaveButtonClick(object sender, RoutedEventArgs e)
+    private void SaveButtonClick(object? sender, RoutedEventArgs e)
     {
-        // var resultCount = int.TryParse(AngleSlider.Value, out var countAngle);
-        // var resultMeasure = int.TryParse(Measure.Text, out var measureAngle);
-        // var resultRadius = int.TryParse(Radius.Text, out var radius);
-        // if (resultCount && resultMeasure && resultRadius)
-        // {
-        //     _controller.Update(new PolygonEvent(countAngle, measureAngle % 360, radius));
-        //     Close();
-        // }
-        // else
-        // {
-        //     ErrorTextBlock.Text = "Invalid input. Please enter a valid number.";
-        // }
+        _controller.Update(new PolygonEvent(
+                (int)AngleSlider.Value, 
+                (int)TurnSlider.Value, 
+                (int)RadiusSlider.Value));
     }
 
     private void VerifyTextBox()

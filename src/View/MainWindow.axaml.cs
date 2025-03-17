@@ -13,6 +13,7 @@ public partial class MainWindow : Window
 {
     private DrawingPanel _drawingPanel;
     private MainController _controller;
+    private bool _isCreatePolygonWindow = false;
     public DrawingPanel Panel => _drawingPanel;
 
     public MainWindow()
@@ -47,7 +48,7 @@ public partial class MainWindow : Window
         _drawingPanel.SetTool(tool);
     }
 
-    private void OnPencilToolClick(object sender, RoutedEventArgs e)
+    private void OnPencilToolClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new PencilEvent());
         Line.IsChecked = false;
@@ -55,7 +56,7 @@ public partial class MainWindow : Window
         Polygon.IsChecked = false;
     }
 
-    private void OnLineToolClick(object sender, RoutedEventArgs e)
+    private void OnLineToolClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new LineEvent());
         Pencil.IsChecked = false;
@@ -63,7 +64,7 @@ public partial class MainWindow : Window
         Polygon.IsChecked = false;
     }
 
-    private void OnFillToolClick(object sender, RoutedEventArgs e)
+    private void OnFillToolClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new FillEvent());
         Pencil.IsChecked = false;
@@ -71,11 +72,14 @@ public partial class MainWindow : Window
         Polygon.IsChecked = false;
     }
 
-    private void OnPolygonToolClick(object sender, RoutedEventArgs e)
+    private void OnPolygonToolClick(object? sender, RoutedEventArgs e)
     {
-        if (Polygon.IsChecked == true)
+        if (Polygon.IsChecked == true && !_isCreatePolygonWindow)
         {
+            _isCreatePolygonWindow = true;
             var polygonWindow = new PolygonCreateWindow(_controller);
+            polygonWindow.Closed += (s, args) => _isCreatePolygonWindow = false;
+
             polygonWindow.Show(this);
             Pencil.IsChecked = false;
             Line.IsChecked = false;
@@ -83,32 +87,32 @@ public partial class MainWindow : Window
         }
     }
 
-    private void OnBlackClick(object sender, RoutedEventArgs e)
+    private void OnBlackClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ChangeColorEvent(Colors.Black));
     }
 
-    private void OnRedCLick(object sender, RoutedEventArgs e)
+    private void OnRedCLick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ChangeColorEvent(Colors.Red));
     }
 
-    private void OnGreenClick(object sender, RoutedEventArgs e)
+    private void OnGreenClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ChangeColorEvent(Colors.Green));
     }
 
-    private void OnBlueClick(object sender, RoutedEventArgs e)
+    private void OnBlueClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ChangeColorEvent(Colors.Blue));
     }
 
-    private void OnClearClick(object sender, RoutedEventArgs e)
+    private void OnClearClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ClearEvent());
     }
 
-    private void OnSliderChanged(object sender, RoutedEventArgs e)
+    private void OnSliderChanged(object? sender, RoutedEventArgs e)
     {
         if ( sender is Slider slider)
         {
