@@ -12,7 +12,7 @@ namespace src.View.Drawing;
 public partial class DrawingPanel : UserControl
 {
     private WriteableBitmap _bitmap;
-    private ITool _tool;
+    private ITool? _tool;
     public WriteableBitmap Bitmap => _bitmap;
 
     public DrawingPanel()
@@ -60,5 +60,15 @@ public partial class DrawingPanel : UserControl
         PointerPressed += _tool.OnPointerPressed;
         PointerReleased += _tool.OnPointerReleased;
         PointerMoved += _tool.OnPointerMoved;
+    }
+
+    public void ClearTool()
+    {
+        if (_tool is not null)
+        {
+            PointerPressed -= _tool.OnPointerPressed;
+            PointerReleased -= _tool.OnPointerReleased;
+            PointerMoved -= _tool.OnPointerMoved; 
+        }
     }
 }

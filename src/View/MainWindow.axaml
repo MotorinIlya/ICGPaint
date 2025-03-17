@@ -46,7 +46,6 @@
             <Setter Property="Background" Value="#3D3D3D"/>
         </Style>
 
-        <!-- Стиль для цветных кнопок -->
         <Style Selector="Button.color-button">
             <Setter Property="Width" Value="24"/>
             <Setter Property="Height" Value="24"/>
@@ -64,7 +63,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <!-- Верхняя панель инструментов -->
         <Border Grid.Row="0" 
                 Background="#252526" 
                 Height="48"
@@ -77,17 +75,16 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Левая часть -->
                 <StackPanel Orientation="Horizontal" Grid.Column="0">
                     <Button x:Name="Settings" Content="⚙" />
                     <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
                 </StackPanel>
 
-                <!-- Инструменты -->
                 <StackPanel Orientation="Horizontal" 
                             Grid.Column="1"
                             HorizontalAlignment="Left"
-                            Spacing="4">
+                            Spacing="4"
+                            x:Name="Buttons">
                     
                     <ToggleButton x:Name="Pencil" ToolTip.Tip="Карандаш">✏</ToggleButton>
                     <ToggleButton x:Name="Line" ToolTip.Tip="Линия">📏</ToggleButton>
@@ -97,7 +94,6 @@
                     
                     <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
                     
-                    <!-- Кнопки цвета -->
                     <Button x:Name="ColorPickerButton" 
                             Content="🎨" 
                             ToolTip.Tip="Выбор цвета"/>
@@ -124,7 +120,6 @@
 
                     <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
 
-                    <!-- Новые элементы: TextBox и Slider -->
                     <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
                         <TextBox Width="60" 
                                 Text="{Binding Value, ElementName=ThicknessSlider, Mode=TwoWay, StringFormat='{}{0:F0}'}"
@@ -144,12 +139,10 @@
             </Grid>
         </Border>
 
-        <!-- Область рисования -->
         <ContentControl Grid.Row="1" 
                       Background="#1E1E1E"
                       x:Name="DrawingArea"/>
 
-        <!-- Статус-бар -->
         <Border Grid.Row="2" 
               Background="#252526"
               Height="24"

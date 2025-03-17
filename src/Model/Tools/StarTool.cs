@@ -3,7 +3,7 @@ using src.View.Drawing;
 
 namespace src.Model.Tools;
 
-public class PolygonTool(DrawingPanel panel,
+public class StarTool(DrawingPanel panel,
         Drawer drawer, 
         int countAngle, 
         int measureAngle,
@@ -25,7 +25,7 @@ public class PolygonTool(DrawingPanel panel,
     public void OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var center = e.GetPosition(_panel);
-        _drawer.DrawPolygon(_panel.Bitmap, center, _countAngle, _measureAngle, _radius);
+        _drawer.DrawStar(_panel.Bitmap, center, _countAngle, _measureAngle, _radius);
     }
 
     public void OnPointerReleased(object? sender, PointerReleasedEventArgs e) {}

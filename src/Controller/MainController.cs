@@ -17,6 +17,7 @@ public class MainController
     private PencilTool _pencilTool;
     private FillTool _fillTool;
     private PolygonTool _polygonTool;
+    private StarTool _starTool;
 
     public MainController(MainWindow window)
     {
@@ -26,6 +27,7 @@ public class MainController
         _pencilTool = new(_window.Panel, _drawer);
         _fillTool = new(_window.Panel, _drawer);
         _polygonTool = new(_window.Panel, _drawer, 3, 0, 10);
+        _starTool = new(_window.Panel, _drawer, 3, 0, 10);
     }
 
     public void Update(IEvent gameEvent)
@@ -46,6 +48,11 @@ public class MainController
         {
             _polygonTool.SetParameters(e.CountAngle, e.AngleMeasure, e.Radius);
             _window.SetTool(_polygonTool);
+        }
+        else if (gameEvent is StarEvent se)
+        {
+            _starTool.SetParameters(se.CountAngle, se.AngleMeasure, se.Radius);
+            _window.SetTool(_starTool);
         }
         else if (gameEvent is ChangeColorEvent change)
         {

@@ -1,20 +1,35 @@
 using System;
 using System.Globalization;
+using Avalonia.Data;
 using Avalonia.Data.Converters;
 
 namespace src.Service.Converters;
 
 public class SafeDoubleConverter : IValueConverter
 {
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        return value?.ToString();
+        if (value is double v)
+        {
+            return v.ToString("F0");
+        }
+        return string.Empty;
     }
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        return double.TryParse(value?.ToString(), NumberStyles.Any, culture, out double result) 
-            ? result 
-            : 0;
+        string? text = value?.ToString();
+        
+        if (string.IsNullOrEmpty(text))
+        {
+            return double.NaN;
+        }
+
+        if (double.TryParse(text, NumberStyles.Any, culture, out double result))
+        {
+            return result;
+        }
+        
+        return double.NaN;
     }
 }

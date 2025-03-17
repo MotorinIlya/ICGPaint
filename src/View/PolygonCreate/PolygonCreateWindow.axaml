@@ -27,8 +27,8 @@
             <TextBox x:Name="AngleTextBox" Width="50" 
                 Text="{Binding Value, 
                     ElementName=AngleSlider, 
-                    Converter={StaticResource SafeDoubleConverter}}, 
-                    Mode=TwoWay" />
+                    Converter={StaticResource SafeDoubleConverter}, 
+                    Mode=TwoWay}" />
         </StackPanel>
 
         <TextBlock Text="Угол поворота" Margin="0,0,0,5"/>
@@ -53,7 +53,7 @@
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="SaveButton" Content="OK" Margin="0,0,10,0"/>
-            <Button Content="Отмена"/>
+            <Button x:Name="CancelButton" Content="Отмена"/>
         </StackPanel>
     </StackPanel>
 </Window>

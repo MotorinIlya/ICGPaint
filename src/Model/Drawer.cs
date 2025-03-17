@@ -189,7 +189,37 @@ public class Drawer(DrawingPanel drawingPanel)
             );
         }
 
-        var stride = GetRowBytes(bitmap);
+        for (var i = 0; i < points.Length; i++)
+        {
+            var start = points[i];
+            var end = points[(i + 1) % points.Length];
+            DrawLine(bitmap, start, end);
+        }
+
+        _panel.InvalidateVisual();
+    }
+
+    public void DrawStar(WriteableBitmap bitmap, 
+                            Point center,
+                            int pointsCount, 
+                            int measureAngle,
+                            int radius)
+    {   
+        var rotation = measureAngle * Math.PI / 180;
+        Point[] points = new Point[pointsCount * 2];
+        for (int i = 0; i < pointsCount * 2; i += 2)
+        {
+            var angle = 2 * Math.PI * i / pointsCount + rotation;
+            var minAngle = 2 * Math.PI * (i + 1/2) / pointsCount + rotation;
+            points[i] = new Point(
+                center.X + (int)(radius * Math.Cos(angle)),
+                center.Y + (int)(radius * Math.Sin(angle))
+            );
+            points[i + 1] = new Point(
+                center.X + (int)(radius / 3 * Math.Cos(minAngle)),
+                center.Y + (int)(radius / 3 * Math.Sin(minAngle))
+            );
+        }
 
         for (var i = 0; i < points.Length; i++)
         {

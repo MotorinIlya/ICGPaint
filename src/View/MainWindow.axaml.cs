@@ -6,6 +6,8 @@ using Avalonia.Interactivity;
 using src.Model.Tools;
 using src.View.PolygonCreate;
 using Avalonia.Media;
+using Avalonia.Controls.Primitives;
+using System.Linq;
 
 namespace src.View;
 
@@ -14,6 +16,7 @@ public partial class MainWindow : Window
     private DrawingPanel _drawingPanel;
     private MainController _controller;
     private bool _isCreatePolygonWindow = false;
+    private ToggleButton? _clickedButton;
     public DrawingPanel Panel => _drawingPanel;
 
     public MainWindow()
@@ -50,40 +53,71 @@ public partial class MainWindow : Window
 
     private void OnPencilToolClick(object? sender, RoutedEventArgs e)
     {
-        _controller.Update(new PencilEvent());
-        Line.IsChecked = false;
-        Fill.IsChecked = false;
-        Polygon.IsChecked = false;
+        if (sender is ToggleButton button && button.IsChecked == true)
+        {
+            _clickedButton = button;
+            _controller.Update(new PencilEvent());
+            Fill.IsChecked = false;
+            Line.IsChecked = false;
+            Polygon.IsChecked = false;
+        }
     }
 
     private void OnLineToolClick(object? sender, RoutedEventArgs e)
     {
-        _controller.Update(new LineEvent());
-        Pencil.IsChecked = false;
-        Fill.IsChecked = false;
-        Polygon.IsChecked = false;
+        if (sender is ToggleButton button && button.IsChecked == true)
+        {
+            _clickedButton = button;
+            _controller.Update(new LineEvent());
+            Pencil.IsChecked = false;
+            Fill.IsChecked = false;
+            Polygon.IsChecked = false;
+        }
     }
 
     private void OnFillToolClick(object? sender, RoutedEventArgs e)
     {
-        _controller.Update(new FillEvent());
-        Pencil.IsChecked = false;
-        Line.IsChecked = false;
-        Polygon.IsChecked = false;
+        if (sender is ToggleButton button && button.IsChecked == true)
+        {
+            _clickedButton = button;
+            _controller.Update(new FillEvent());
+            Pencil.IsChecked = false;
+            Line.IsChecked = false;
+            Polygon.IsChecked = false;
+        }
     }
 
     private void OnPolygonToolClick(object? sender, RoutedEventArgs e)
     {
-        if (Polygon.IsChecked == true && !_isCreatePolygonWindow)
+        if (sender is ToggleButton clickedButton)
         {
-            _isCreatePolygonWindow = true;
-            var polygonWindow = new PolygonCreateWindow(_controller);
-            polygonWindow.Closed += (s, args) => _isCreatePolygonWindow = false;
-
-            polygonWindow.Show(this);
-            Pencil.IsChecked = false;
-            Line.IsChecked = false;
-            Fill.IsChecked = false;
+            if (Polygon.IsChecked == true && !_isCreatePolygonWindow)
+            {
+                _isCreatePolygonWindow = true;
+                var polygonWindow = new PolygonCreateWindow(_controller);
+                polygonWindow.Data += (s, result) => 
+                {   
+                    _isCreatePolygonWindow = false;
+                    if (!result)
+                    {
+                        clickedButton.IsChecked = false;
+                        if (_clickedButton is not null && _clickedButton != clickedButton)
+                        {
+                            _clickedButton.IsChecked = true;
+                            _drawingPanel.ClearTool();
+                        }
+                    }
+                    else
+                    {
+                        if (_clickedButton is not null)
+                        {
+                            _clickedButton.IsChecked = false;
+                        }  
+                        _clickedButton = clickedButton;
+                    }
+                };
+                polygonWindow.Show(this);
+            }
         }
     }
 
