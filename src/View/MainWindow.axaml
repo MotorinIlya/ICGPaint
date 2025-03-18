@@ -72,9 +72,9 @@
                 <MenuItem Header="Edit">
                     <MenuItem Header="Tools">
                         <MenuItem Header="Pencil" Click="OnPencilToolClick"/>
-                        <MenuItem Header="Line"/>
-                        <MenuItem Header="Fill"/>
-                        <MenuItem Header="Polygons"/>
+                        <MenuItem Header="Line" Click="OnLineToolClick"/>
+                        <MenuItem Header="Fill" Click="OnFillToolClick"/>
+                        <MenuItem Header="Polygons" Click="OnPolygonToolClick"/>
                     </MenuItem>
                     <MenuItem Header="Clear"/>
                 </MenuItem>
