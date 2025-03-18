@@ -73,6 +73,9 @@ public partial class MainWindow : Window
         }
     }
 
+    private void PencilMenuItemClick(object? sender, RoutedEventArgs e) =>
+            Pencil.IsChecked = true;
+
     private void OnLineToolClick(object? sender, RoutedEventArgs e)
     {
         if (sender is ToggleButton button && button.IsChecked == true)
@@ -165,8 +168,13 @@ public partial class MainWindow : Window
         }
     }
 
-    private async void OnLoadImageClick(object? sender, RoutedEventArgs e)
+    private void OnLoadImageClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new LoadImageEvent());
+    }
+
+    private void OnSaveImageClick(object? sender, RoutedEventArgs e)
+    {
+        _controller.Update(new SaveImageEvent());
     }
 }

@@ -67,11 +67,11 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="File">
                     <MenuItem Header="Load" Click="OnLoadImageClick"/>
-                    <MenuItem Header="Save"/>
+                    <MenuItem Header="Save" Click="OnSaveImageClick"/>
                 </MenuItem>
                 <MenuItem Header="Edit">
                     <MenuItem Header="Tools">
-                        <MenuItem Header="Pencil"/>
+                        <MenuItem Header="Pencil" Click="OnPencilToolClick"/>
                         <MenuItem Header="Line"/>
                         <MenuItem Header="Fill"/>
                         <MenuItem Header="Polygons"/>

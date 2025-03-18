@@ -75,5 +75,9 @@ public partial class DrawingPanel : UserControl
     public void SetBitmap(WriteableBitmap bitmap)
     {
         _bitmap = bitmap;
+        using var buffer = bitmap.Lock();
+        Width = buffer.Size.Width;
+        Height = buffer.Size.Height;
+        InvalidateVisual();
     }
 }

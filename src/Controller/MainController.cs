@@ -72,5 +72,9 @@ public class MainController
         {
             _fileWorker.SetImage(_window);
         }
+        else if (gameEvent is SaveImageEvent sie)
+        {
+            _fileWorker.SaveImage(_window);
+        }
     }
 }
