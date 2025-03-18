@@ -76,9 +76,9 @@
                         <MenuItem Header="Fill" Click="OnFillToolClick"/>
                         <MenuItem Header="Polygons" Click="OnPolygonToolClick"/>
                     </MenuItem>
-                    <MenuItem Header="Clear"/>
+                    <MenuItem Header="Clear" Click="OnClearClick"/>
                 </MenuItem>
-                <MenuItem Header="About"/>
+                <MenuItem Header="About" Click="OnAboutClick"/>
             </Menu>
         </DockPanel>
 

@@ -7,6 +7,7 @@ using src.Model.Tools;
 using src.View.PolygonCreate;
 using Avalonia.Media;
 using Avalonia.Controls.Primitives;
+using src.View.About;
 
 namespace src.View;
 
@@ -172,5 +173,11 @@ public partial class MainWindow : Window
     private void OnSaveImageClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new SaveImageEvent());
+    }
+
+    private void OnAboutClick(object? sender, RoutedEventArgs e)
+    {
+        var about = new AboutWindow();
+        about.ShowDialog(this);
     }
 }

@@ -1,0 +1,93 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="src.View.About.AboutWindow"
+        Title="О программе"
+        Width="600" 
+        Height="500"
+        Background="White"
+        FontFamily="Arial">
+    
+    <ScrollViewer Margin="15">
+        <StackPanel Spacing="20">
+            <!-- Заголовок -->
+            <TextBlock Text="О программе" 
+                       FontSize="24" 
+                       FontWeight="Bold"
+                       Foreground="#333333"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Список инструментов -->
+            <Border BorderBrush="#E0E0E0" 
+                    BorderThickness="0 0 0 1"
+                    Padding="0 0 0 10">
+                <ListBox IsEnabled="False" 
+                        Background="Transparent"
+                        BorderThickness="0">
+                    <ListBoxItem>
+                        <TextBlock Text="Линия — рисует отрезок между двумя точками" 
+                                   Foreground="#444444"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBlock Text="Карандаш — рисует линию при движении мыши" 
+                                   Foreground="#444444"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBlock Text="Штамп — создаёт многоугольники и звёзды (3-20 вершин)" 
+                                   Foreground="#444444"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBlock Text="Заливка — заполняет область цветом" 
+                                   Foreground="#444444"/>
+                    </ListBoxItem>
+                </ListBox>
+            </Border>
+
+            <!-- Общие параметры -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Общие параметры" 
+                           FontSize="16" 
+                           Foreground="#333333"/>
+                <TextBlock Text="• Цвет линии: палитра выбора" 
+                           Foreground="#666666"/>
+                <TextBlock Text="• Толщина линии: от 1 до 50 пикселей" 
+                           Foreground="#666666"/>
+            </StackPanel>
+
+            <!-- Настройки штампа -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Настройки штампа" 
+                           FontSize="16" 
+                           Foreground="#333333"/>
+                <TextBlock Text="• Угол поворота: 0-360 градусов" 
+                           Foreground="#666666"/>
+                <TextBlock Text="• Режим звезды: регулировка внутреннего радиуса" 
+                           Foreground="#666666"/>
+            </StackPanel>
+
+            <!-- Работа с файлами -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Работа с файлами" 
+                           FontSize="16" 
+                           Foreground="#333333"/>
+                <Grid ColumnDefinitions="120,*" 
+                      Margin="0 5">
+                    <TextBlock Text="Сохранение:" 
+                               Foreground="#666666"/>
+                    <TextBlock Text="PNG, JPEG" 
+                               Grid.Column="1" 
+                               Foreground="#666666"/>
+                    <TextBlock Text="Загрузка:" 
+                               Grid.Column="0" 
+                               Grid.Row="1" 
+                               Margin="0 15"
+                               Foreground="#666666"/>
+                    <TextBlock Text="PNG, JPEG, BMP, GIF" 
+                               Grid.Column="1" 
+                               Grid.Row="1" 
+                               Margin="0 15"
+                               Foreground="#666666"/>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Window>
