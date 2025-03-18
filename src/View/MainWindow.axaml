@@ -106,10 +106,21 @@
                     <Button x:Name="Clear" ToolTip.Tip="Стереть всё">🧽</Button>
                     
                     <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
+
+                    <Border x:Name="CurrentColorDisplay"
+                            Width="24"
+                            Height="24"
+                            Margin="4 0"
+                            CornerRadius="12"
+                            BorderThickness="1"
+                            BorderBrush="White"
+                            Background="Black"
+                            ToolTip.Tip="Текущий цвет"/>
                     
                     <Button x:Name="ColorPickerButton" 
                             Content="🎨" 
-                            ToolTip.Tip="Выбор цвета"/>
+                            ToolTip.Tip="Выбор цвета"
+                            Click="OnColorPickerClick"/>
                     
                     <Button x:Name="BlackColor" 
                             Background="Black" 

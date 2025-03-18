@@ -76,5 +76,9 @@ public class MainController
         {
             _fileWorker.SaveImage(_window);
         }
+        else if (gameEvent is ColorChangeEvent cce)
+        {
+            _drawer.SetColor(cce.ColorForSet);
+        }
     }
 }

@@ -8,6 +8,7 @@ using src.View.PolygonCreate;
 using Avalonia.Media;
 using Avalonia.Controls.Primitives;
 using src.View.About;
+using src.View.ColorPicker;
 
 namespace src.View;
 
@@ -134,21 +135,25 @@ public partial class MainWindow : Window
     private void OnBlackClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ChangeColorEvent(Colors.Black));
+        CurrentColorDisplay.Background = new SolidColorBrush(Colors.Black);
     }
 
     private void OnRedCLick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ChangeColorEvent(Colors.Red));
+        CurrentColorDisplay.Background = new SolidColorBrush(Colors.Red);
     }
 
     private void OnGreenClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ChangeColorEvent(Colors.Green));
+        CurrentColorDisplay.Background = new SolidColorBrush(Colors.Green);
     }
 
     private void OnBlueClick(object? sender, RoutedEventArgs e)
     {
         _controller.Update(new ChangeColorEvent(Colors.Blue));
+        CurrentColorDisplay.Background = new SolidColorBrush(Colors.Blue);
     }
 
     private void OnClearClick(object? sender, RoutedEventArgs e)
@@ -179,5 +184,16 @@ public partial class MainWindow : Window
     {
         var about = new AboutWindow();
         about.ShowDialog(this);
+    }
+
+    private void OnColorPickerClick(object? sender, RoutedEventArgs e)
+    {
+        var colorWindow = new ColorPickerWindow();
+        colorWindow.Data += (s, result) =>
+        {
+            _controller.Update(new ColorChangeEvent(result));
+            CurrentColorDisplay.Background = new SolidColorBrush(result);
+        };
+        colorWindow.Show();
     }
 }
