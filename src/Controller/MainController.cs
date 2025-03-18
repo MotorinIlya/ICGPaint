@@ -13,6 +13,7 @@ public class MainController
 {
     private MainWindow _window;
     private Drawer _drawer;
+    private FileWorker _fileWorker;
     private LineTool _lineTool;
     private PencilTool _pencilTool;
     private FillTool _fillTool;
@@ -22,12 +23,13 @@ public class MainController
     public MainController(MainWindow window)
     {
         _window = window;
-        _drawer = new Drawer(window.Panel);
+        _drawer = new(window.Panel);
         _lineTool = new(_window.Panel, _drawer);
         _pencilTool = new(_window.Panel, _drawer);
         _fillTool = new(_window.Panel, _drawer);
         _polygonTool = new(_window.Panel, _drawer, 3, 0, 10);
         _starTool = new(_window.Panel, _drawer, 3, 0, 10);
+        _fileWorker = new();
     }
 
     public void Update(IEvent gameEvent)
@@ -65,6 +67,10 @@ public class MainController
         else if (gameEvent is SliderEvent ev)
         {
             _drawer.SetThinkness(ev.Thinkness);
+        }
+        else if (gameEvent is LoadImageEvent lfe)
+        {
+            _fileWorker.SetImage(_window);
         }
     }
 }

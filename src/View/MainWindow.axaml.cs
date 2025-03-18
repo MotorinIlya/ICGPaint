@@ -8,6 +8,9 @@ using src.View.PolygonCreate;
 using Avalonia.Media;
 using Avalonia.Controls.Primitives;
 using System.Linq;
+using System.Threading.Tasks;
+using Avalonia.Media.Imaging;
+using System.IO;
 
 namespace src.View;
 
@@ -24,13 +27,20 @@ public partial class MainWindow : Window
         InitializeComponent();
         Title = "ICGPaint";
 
-        Width = 1920;
-        Height = 1080;
+        Width = 1280;
+        Height = 720;
         WindowState = WindowState.Maximized;
 
         _drawingPanel = new();
-        Grid.SetRow(_drawingPanel, 1);
-        MainGrid.Children.Add(_drawingPanel);
+        
+        var scrollViewer = new ScrollViewer
+        {
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            Content = _drawingPanel
+        };
+        Grid.SetRow(scrollViewer, 2);
+        MainGrid.Children.Add(scrollViewer);
         
         _controller = new(this);
 
@@ -153,5 +163,10 @@ public partial class MainWindow : Window
             var val = (int)slider.Value;
             _controller.Update(new SliderEvent(val));
         }
+    }
+
+    private async void OnLoadImageClick(object? sender, RoutedEventArgs e)
+    {
+        _controller.Update(new LoadImageEvent());
     }
 }

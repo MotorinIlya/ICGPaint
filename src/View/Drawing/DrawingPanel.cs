@@ -17,24 +17,24 @@ public partial class DrawingPanel : UserControl
 
     public DrawingPanel()
     {
+        Width = 1280;
+        Height = 720;
         _bitmap = new(
             new PixelSize(1920, 1080),
             new Vector(96, 96),
             PixelFormat.Bgra8888,
             AlphaFormat.Opaque);
 
-        using (var buffer = _bitmap.Lock())
+        using var buffer = _bitmap.Lock();
+        unsafe
         {
-            unsafe
+            byte* ptr = (byte*)buffer.Address.ToPointer();
+            for (int i = 0; i < buffer.Size.Width * buffer.Size.Height * 4; i += 4)
             {
-                byte* ptr = (byte*)buffer.Address.ToPointer();
-                for (int i = 0; i < buffer.Size.Width * buffer.Size.Height * 4; i += 4)
-                {
-                    ptr[i] = 255;
-                    ptr[i + 1] = 255;
-                    ptr[i + 2] = 255;
-                    ptr[i + 3] = 255;
-                }
+                ptr[i] = 255;
+                ptr[i + 1] = 255;
+                ptr[i + 2] = 255;
+                ptr[i + 3] = 255;
             }
         }
     }
@@ -70,5 +70,10 @@ public partial class DrawingPanel : UserControl
             PointerReleased -= _tool.OnPointerReleased;
             PointerMoved -= _tool.OnPointerMoved; 
         }
+    }
+
+    public void SetBitmap(WriteableBitmap bitmap)
+    {
+        _bitmap = bitmap;
     }
 }
