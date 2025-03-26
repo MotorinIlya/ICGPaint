@@ -1,6 +1,5 @@
 using System;
 using System.Globalization;
-using Avalonia.Data;
 using Avalonia.Data.Converters;
 
 namespace src.Service.Converters;
@@ -25,11 +24,12 @@ public class SafeDoubleConverter : IValueConverter
             return double.NaN;
         }
 
-        if (double.TryParse(text, NumberStyles.Any, culture, out double result))
+        if (!double.TryParse(text, NumberStyles.Any, culture, out var _))
         {
-            return result;
+            return double.NaN;
         }
         
-        return double.NaN;
+        var result = double.Parse(text);
+        return result;
     }
 }

@@ -9,14 +9,12 @@
     
     <ScrollViewer Margin="15">
         <StackPanel Spacing="20">
-            <!-- Заголовок -->
             <TextBlock Text="О программе" 
                        FontSize="24" 
                        FontWeight="Bold"
                        Foreground="#333333"
                        HorizontalAlignment="Center"/>
 
-            <!-- Список инструментов -->
             <Border BorderBrush="#E0E0E0" 
                     BorderThickness="0 0 0 1"
                     Padding="0 0 0 10">
@@ -42,7 +40,6 @@
                 </ListBox>
             </Border>
 
-            <!-- Общие параметры -->
             <StackPanel Spacing="8">
                 <TextBlock Text="Общие параметры" 
                            FontSize="16" 
@@ -53,7 +50,6 @@
                            Foreground="#666666"/>
             </StackPanel>
 
-            <!-- Настройки штампа -->
             <StackPanel Spacing="8">
                 <TextBlock Text="Настройки штампа" 
                            FontSize="16" 
@@ -64,7 +60,6 @@
                            Foreground="#666666"/>
             </StackPanel>
 
-            <!-- Работа с файлами -->
             <StackPanel Spacing="8">
                 <TextBlock Text="Работа с файлами" 
                            FontSize="16" 

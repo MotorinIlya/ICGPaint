@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:src.Service.Converters"
         mc:Ignorable="d" 
         x:Class="src.View.MainWindow"
         Title="ICGPaint"
@@ -9,6 +10,10 @@
         MinWidth="800"
         FontFamily="Segoe UI"
         Background="#1A1A1A">
+
+    <Window.Resources>
+        <local:SafeDoubleConverter x:Key="SafeDoubleConverter" />
+    </Window.Resources>
         
     <Window.Styles>
         <Style Selector="ToggleButton">
@@ -145,8 +150,12 @@
                     <Separator Background="#ffffff" Margin="5 0" Width="1" Height="30"/>
 
                     <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
-                        <TextBox Width="60" 
-                                Text="{Binding Value, ElementName=ThicknessSlider, Mode=TwoWay, StringFormat='{}{0:F0}'}"
+                        <TextBox x:Name="ThinknessTextBox"
+                                Width="60" 
+                                Text="{Binding Value, 
+                                        ElementName=ThicknessSlider, 
+                                        Mode=TwoWay, 
+                                        Converter={StaticResource SafeDoubleConverter}}"
                                 Margin="4 0"
                                 ToolTip.Tip="Толщина линии"
                                 Foreground="White"

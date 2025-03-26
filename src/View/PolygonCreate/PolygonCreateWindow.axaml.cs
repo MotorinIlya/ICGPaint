@@ -1,7 +1,6 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media;
 using src.Controller;
 using src.Service.Events;
 
@@ -70,7 +69,7 @@ public partial class PolygonCreateWindow : Window
             slider.Value = slider.Minimum;
             return;
         }
-        if (!int.TryParse(box.Text, out _))
+        if (!int.TryParse(box.Text, out var v) || v > slider.Maximum)
         {
             var tmp = box.Text;
             tmp = tmp?[..^1];

@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Input;
-using Avalonia.Media;
 using src.View.Drawing;
 
 namespace src.Model.Tools;
@@ -17,7 +16,6 @@ public class PencilTool(DrawingPanel panel, Drawer drawer) : ITool
     {
         _isDrawing = true;
         _previousPosition = e.GetPosition(_panel);
-        //_drawer.DrawPixel(_panel.Bitmap, e.GetPosition(_panel));
     }
 
     public void OnPointerReleased(object? sender, PointerReleasedEventArgs e)

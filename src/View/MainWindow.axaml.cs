@@ -52,6 +52,7 @@ public partial class MainWindow : Window
         BlueColor.Click += OnBlueClick;
         Clear.Click += OnClearClick;
         ThicknessSlider.ValueChanged += OnSliderChanged;
+        ThinknessTextBox.TextChanged += (s, e) => VerifyTextBox(ThinknessTextBox, ThicknessSlider);
     }
 
     public void SetTool(ITool tool)
@@ -195,5 +196,20 @@ public partial class MainWindow : Window
             CurrentColorDisplay.Background = new SolidColorBrush(result);
         };
         colorWindow.Show();
+    }
+
+    private void VerifyTextBox(TextBox box, Slider slider)
+    {
+        if (string.IsNullOrEmpty(box.Text))
+        {
+            slider.Value = slider.Minimum;
+            return;
+        }
+        if (!int.TryParse(box.Text, out var v) || v > slider.Maximum)
+        {
+            var tmp = box.Text;
+            tmp = tmp?[..^1];
+            box.Text =  tmp;
+        }
     }
 }

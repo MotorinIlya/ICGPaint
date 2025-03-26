@@ -1,4 +1,3 @@
-<!-- ColorPickerWindow.axaml -->
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +11,7 @@
         SystemDecorations="None"
         CanResize="False">
     <Grid Margin="10" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
-        <!-- Preview -->
+
         <Border Name="colorPreview"
                 Grid.Row="0"
                 Height="80"
@@ -21,7 +20,6 @@
                 BorderBrush="Gray"
                 BorderThickness="1"/>
         
-        <!-- Red Channel -->
         <Grid Grid.Row="1" ColumnDefinitions="Auto,*,100" Margin="0,5">
             <TextBlock Text="R:" VerticalAlignment="Center" Margin="0,0,10,0"/>
             <Slider Name="redSlider" 
@@ -34,7 +32,6 @@
                      Text="{Binding #redSlider.Value, StringFormat={}{0:0}}"/>
         </Grid>
 
-        <!-- Green Channel -->
         <Grid Grid.Row="2" ColumnDefinitions="Auto,*,100" Margin="0,5">
             <TextBlock Text="G:" VerticalAlignment="Center" Margin="0,0,10,0"/>
             <Slider Name="greenSlider" 
@@ -47,7 +44,6 @@
                      Text="{Binding #greenSlider.Value, StringFormat={}{0:0}}"/>
         </Grid>
 
-        <!-- Blue Channel -->
         <Grid Grid.Row="3" ColumnDefinitions="Auto,*,100" Margin="0,5">
             <TextBlock Text="B:" VerticalAlignment="Center" Margin="0,0,10,0"/>
             <Slider Name="blueSlider" 
@@ -60,7 +56,6 @@
                      Text="{Binding #blueSlider.Value, StringFormat={}{0:0}}"/>
         </Grid>
 
-        <!-- Buttons -->
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20">
             <Button Name="okButton" Content="OK" Width="80" Margin="0,0,10,0"/>
             <Button Name="cancelButton" Content="Cancel" Width="80"/>

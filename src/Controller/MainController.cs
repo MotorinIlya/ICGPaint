@@ -1,8 +1,5 @@
-using Avalonia.Controls;
-using Avalonia.Media;
 using src.Model;
 using src.Model.Tools;
-using src.Service;
 using src.Service.Events;
 using src.View;
 
@@ -32,7 +29,7 @@ public class MainController
         _fileWorker = new();
     }
 
-    public void Update(IEvent gameEvent)
+    public async void Update(IEvent gameEvent)
     {
         if (gameEvent is PencilEvent)
         {
@@ -70,11 +67,11 @@ public class MainController
         }
         else if (gameEvent is LoadImageEvent lfe)
         {
-            _fileWorker.SetImage(_window);
+            await _fileWorker.SetImage(_window);
         }
         else if (gameEvent is SaveImageEvent sie)
         {
-            _fileWorker.SaveImage(_window);
+            await _fileWorker.SaveImage(_window);
         }
         else if (gameEvent is ColorChangeEvent cce)
         {

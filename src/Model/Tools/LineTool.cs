@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Input;
-using Avalonia.Media;
 using src.View.Drawing;
 
 namespace src.Model.Tools;
